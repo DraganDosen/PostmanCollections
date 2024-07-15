@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "64c0a450-ffa2-440b-87de-244b21b5627b",
+		"name": "Dragan Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17637976"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//first export collection as json, then\r",
+							"//newman run Dragan_postman_collection.json\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"page\");\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"page\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"per_page\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"2\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"total\":12');\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"per_page\":6');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}?page=1",
+					"host": [
+						"{{URL}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"console.log(\"I am here\")\r",
+							"pm.globals.set('name','Dragan');\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    //parse the response JSON and test three properties\r",
+							"    const responseJson = pm.response.json();\r",
+							"    //pm.expect(responseJson.type).to.eql('vip');\r",
+							"    pm.expect(responseJson.name).to.be.a('string');\r",
+							"    pm.expect(responseJson.id).to.have.lengthOf(3);\r",
+							"});\r",
+							"pm.test(\"Body contains name\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"});\r",
+							"pm.test(\"Body contains job\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"job\");\r",
+							"});\r",
+							"pm.test(\"Body contains id\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"});\r",
+							"pm.test(\"Body contains createdAt\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+							"});\r",
+							"/* Response has the following structure:\r",
+							"{\r",
+							"  \"name\": \"Jane\",\r",
+							"  \"age\": 23\r",
+							"},\r",
+							"*/\r",
+							"pm.test(\"Person is Dagan\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.name).to.eql(\"Dragan\");\r",
+							"  pm.expect(responseJson.job).to.eql(\"leadet_in_team\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", () => {\r",
+							"  pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Dragan\",\r\n    \"job\": \"leadet_in_team\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users",
+				"description": "post"
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users/2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n        \r\n        \"first_name\": \"John\",\r\n        \"last_name\": \"Weaver\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users/2",
+				"description": "put mean update"
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users/2",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n        \r\n        \"first_name\": \"John\"\r\n       \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users/2"
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users?/id=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?/id=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "/id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "barier_token",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": {
+						"addTokenTo": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://api.github.com/user/repos"
+			},
+			"response": []
+		},
+		{
+			"name": "https://fakerestapi.azurewebsites.net/api/v1/Activities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://fakerestapi.azurewebsites.net/api/v1/Activities"
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "626f2fb497423c2"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"draganpragan\"\r\n \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://restful-booker.herokuapp.com/booking/3204"
+			},
+			"response": []
+		},
+		{
+			"name": "token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://restful-booker.herokuapp.com/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"dragan\",\r\n    \"lastname\": \"dosenkovic\",\r\n    \"totalprice\": 111,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2018-01-01\",\r\n        \"checkout\": \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\": \"super bowls\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://restful-booker.herokuapp.com/booking"
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking/1137",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://restful-booker.herokuapp.com/booking/1137"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://reqres.in/api/users",
+			"type": "string"
+		}
+	]
+}
